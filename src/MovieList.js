@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
-const MovieMain = styled.div`
-  display: flex;
-  flex-direction: column;
-`
+import axios from 'axios'
 
 const MovieDetails = styled.li`
+  color: #e7eb90;
   list-style: none;
   em {
-    color: red;
+    color: #ff0000;
     font-size: 1.5rem;
-    text-shadow: 1px 1px 1px yellow;
+    text-shadow: 1px 1px 1px #ffe035;
   }
 `
 
@@ -33,47 +30,20 @@ class MovieList extends Component {
     super(props)
 
     this.state = {
-      page: 1,
-      total_results: 3254,
-      total_pages: 163,
-      results: [
-        {
-          vote_count: 4521,
-          id: 89,
-          video: false,
-          vote_average: 7.7,
-          title: 'Indiana Jones and the Last Crusade',
-          popularity: 22.133,
-          poster_path: '/4p1N2Qrt8j0H8xMHMHvtRxv9weZ.jpg',
-          original_language: 'en',
-          original_title: 'Indiana Jones and the Last Crusade',
-          genre_ids: [12, 28],
-          backdrop_path: '/vfvVuu1JdnEGcyZUj7VHrhhbeMj.jpg',
-          adult: false,
-          overview:
-            "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.",
-          release_date: '1989-05-24'
-        },
-        {
-          vote_count: 3196,
-          id: 268,
-          video: false,
-          vote_average: 7.1,
-          title: 'Batman',
-          popularity: 16.169,
-          poster_path: '/kBf3g9crrADGMc2AMAMlLBgSm2h.jpg',
-          original_language: 'en',
-          original_title: 'Batman',
-          genre_ids: [14, 28],
-          backdrop_path: '/2blmxp2pr4BhwQr74AdCfwgfMOb.jpg',
-          adult: false,
-          overview:
-            "The Dark Knight of Gotham City begins his war on crime with his first major enemy being the clownishly homicidal Joker, who has seized control of Gotham's underworld.",
-          release_date: '1989-06-23'
-        }
-      ]
+      results: []
     }
     console.log(this.state.results)
+  }
+
+  componentWillMount() {
+    axios
+      .get(
+        'https://api.themoviedb.org/3/discover/movie?api_key=528804f087c8209bcf748a9147e6c57d&language=en-US&sort_by=popularity.desc&certification_country=united%20states&include_adult=false&include_video=false&page=1&primary_release_year=1989&year=1989'
+      )
+      .then(response => {
+        this.setState(response.data)
+        console.log(response.data)
+      })
   }
 
   render() {
