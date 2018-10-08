@@ -3,3 +3,9 @@ body {
   background-size: fill;
   color: white;
 }
+
+header,
+main {
+  margin: 2rem auto;
+  width: 700px;
+}
