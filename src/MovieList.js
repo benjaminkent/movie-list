@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+const MovieMain = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const MovieDetails = styled.li`
   list-style: none;
   em {
@@ -10,12 +15,17 @@ const MovieDetails = styled.li`
   }
 `
 
+const MoviesList = styled.ul`
+  display: flex;
+  flex-direction: column;
+`
+
 const MovieInfo = styled.section`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 0 auto;
-  width: 700px;
+  width: 500px;
 `
 
 class MovieList extends Component {
@@ -63,45 +73,51 @@ class MovieList extends Component {
         }
       ]
     }
+    console.log(this.state.results)
   }
 
   render() {
-    const moviePoster =
-      'https://image.tmdb.org/t/p/w185_and_h278_bestv2' +
-      this.state.results[0].poster_path
-    return (
-      <MovieInfo>
-        <figure>
-          <img src={moviePoster} alt="movie poster" />
-        </figure>
-        <ul>
-          <MovieDetails>
-            <strong>
-              <em>Title</em>
-            </strong>
-            : {this.state.results[0].title}
-          </MovieDetails>
-          <MovieDetails>
-            <strong>
-              <em>Overview</em>
-            </strong>
-            : {this.state.results[0].overview}
-          </MovieDetails>
-          <MovieDetails>
-            <strong>
-              <em>Released</em>
-            </strong>
-            : {this.state.results[0].release_date}
-          </MovieDetails>
-          <MovieDetails>
-            <strong>
-              <em>Overall Rating</em>
-            </strong>
-            : {this.state.results[0].vote_average}
-          </MovieDetails>
-        </ul>
-      </MovieInfo>
-    )
+    const movies = this.state.results.map((movie, index) => {
+      let moviePoster =
+        'https://image.tmdb.org/t/p/w185_and_h278_bestv2' +
+        this.state.results[index].poster_path
+
+      return (
+        <>
+          <figure>
+            <img src={moviePoster} alt="movie poster" />
+          </figure>
+          <MoviesList>
+            <MovieDetails>
+              <strong>
+                <em>Title</em>
+              </strong>{' '}
+              : {movie.title}
+            </MovieDetails>
+            <MovieDetails>
+              <strong>
+                <em>Overview</em>
+              </strong>
+              : {movie.overview}
+            </MovieDetails>
+            <MovieDetails>
+              <strong>
+                <em>Released</em>
+              </strong>
+              : {movie.release_date}
+            </MovieDetails>
+            <MovieDetails>
+              <strong>
+                <em>Overall Rating</em>
+              </strong>
+              : {movie.vote_average}
+            </MovieDetails>
+          </MoviesList>
+        </>
+      )
+    })
+
+    return <MovieInfo>{movies}</MovieInfo>
   }
 }
 
