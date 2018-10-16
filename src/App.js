@@ -28,9 +28,12 @@ const FooterInfo = styled.footer`
 
 const Header = styled.header`
   color: #e7eb90;
+  width: 600px;
 `
 
 const Title = styled.main`
+  padding-top: 2rem;
+  width: 600px;
   color: #69fff1
   text-shadow: 1.2px 1.2px 1.2px #e7eb90;
 
@@ -57,6 +60,7 @@ class App extends Component {
           <p>
             All movie posters and information courtesy of{' '}
             <a
+              rel="noopener noreferrer"
               target="_blank"
               title="Check out The Movie DB website!"
               href="https://www.themoviedb.org/"
@@ -66,9 +70,10 @@ class App extends Component {
             .
           </p>
           <p>
-            Made with <i class="fas fa-heart" /> in St Petersburg, FL. 2018
-            Benjamin Kent,{' '}
+            Made with <i className="fas fa-heart" /> in St Petersburg, FL. 2018
+            Benjamin Kent,
             <a
+              rel="noopener noreferrer"
               target="_blank"
               title="Check out my site!"
               href="http://benjaminkent.io/"

@@ -32,7 +32,6 @@ class MovieList extends Component {
     this.state = {
       results: []
     }
-    console.log(this.state.results)
   }
 
   componentWillMount() {
@@ -42,7 +41,6 @@ class MovieList extends Component {
       )
       .then(response => {
         this.setState(response.data)
-        console.log(response.data)
       })
   }
 
@@ -53,7 +51,7 @@ class MovieList extends Component {
         this.state.results[index].poster_path
 
       return (
-        <>
+        <MovieInfo key={movie.id}>
           <figure>
             <img src={moviePoster} alt="movie poster" />
           </figure>
@@ -83,11 +81,11 @@ class MovieList extends Component {
               : {movie.vote_average}
             </MovieDetails>
           </MoviesList>
-        </>
+        </MovieInfo>
       )
     })
 
-    return <MovieInfo>{movies}</MovieInfo>
+    return <div>{movies}</div>
   }
 }
 
